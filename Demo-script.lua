@@ -1,14 +1,12 @@
--- ServerScriptServiceに配置
 local NPCsFolder = workspace:WaitForChild("NPCs")
 local Players = game:GetService("Players")
 
-local ATTACK_RANGE = 5      -- 攻撃範囲（スタッド）
-local ATTACK_DAMAGE = 20    -- 攻撃ダメージ
-local ATTACK_INTERVAL = 1.5 -- 攻撃間隔（秒）
-local FOLLOW_RANGE = 50     -- NPCが追尾を開始する距離
-local FOLLOW_SPEED = 12     -- NPCの追尾スピード
+local ATTACK_RANGE = 5
+local ATTACK_DAMAGE = 20
+local ATTACK_INTERVAL = 1.5
+local FOLLOW_RANGE = 50
+local FOLLOW_SPEED = 12
 
--- 最も近いプレイヤーを取得
 local function getClosestPlayer(npc)
     local closest = nil
     local minDist = math.huge
@@ -35,11 +33,9 @@ for _, npc in ipairs(NPCsFolder:GetChildren()) do
                 local target, dist = getClosestPlayer(npc)
                 if target then
                     if dist <= FOLLOW_RANGE then
-                        -- 追尾
                         humanoid:MoveTo(target.HumanoidRootPart.Position)
                     end
                     if dist <= ATTACK_RANGE and tick() - lastAttack > ATTACK_INTERVAL then
-                        -- 攻撃
                         target.Humanoid:TakeDamage(ATTACK_DAMAGE)
                         lastAttack = tick()
                     end
