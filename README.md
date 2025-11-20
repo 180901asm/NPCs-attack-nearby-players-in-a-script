@@ -1,0 +1,1 @@
+# NPCs-attack-nearby-players-in-a-script
